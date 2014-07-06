@@ -5,16 +5,14 @@ module.exports = function(app) {
 	// api ---------------------------------------------------------------------
 	// get all todos
 	app.get('/api/todos', function(req, res) {
-	    console.log("get all todos");
-
 		// use mongoose to get all todos in the database
 		Todo.find(function(err, todos) {
 
 			// if there is an error retrieving, send the error. nothing after res.send(err) will execute
-		    if (err) {
-			console.log(err);
-			res.send(err)
-		    }
+		        if (err) {
+			    console.log(err);
+			    res.send(err)
+		        }
 
 			res.json(todos); // return all todos in JSON format
 		});
@@ -28,16 +26,12 @@ module.exports = function(app) {
 			text : req.body.text,
 			done : false
 		}, function(err, todo) {
-		    if (err) {
-			console.log(err);
-			res.send(err);
-		    }
-		    else {
-			console.log("created todo " + todo);
-		    }
+		        if (err) {
+			    console.log(err);
+			    res.send(err);
+		        }
 			// get and return all the todos after you create another
 			Todo.find(function(err, todos) {
-			    console.log("found todos " + todos);
 				if (err) {
 				    console.log(err);				    
 				    res.send(err)
@@ -50,7 +44,6 @@ module.exports = function(app) {
 
 	// delete a todo
 	app.delete('/api/todos/:todo_id', function(req, res) {
-	    console.log("delete todo");
 		Todo.remove({
 			_id : req.params.todo_id
 		}, function(err, todo) {
@@ -59,8 +52,10 @@ module.exports = function(app) {
 
 			// get and return all the todos after you create another
 			Todo.find(function(err, todos) {
-				if (err)
-					res.send(err)
+			        if (err) {
+				    console.log(err);
+				    res.send(err)
+			        }
 				res.json(todos);
 			});
 		});
