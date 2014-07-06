@@ -1,5 +1,5 @@
 module.exports = {
 
 	// the database url to connect
-	url : 'mongodb://node:node@mongo.onmodulus.net:27017/uwO3mypu'
+	url : 'mongodb://' + process.env.BACKEND_STORAGE_MONGO_USER + ':' + process.env.BACKEND_STORAGE_MONGO_PASS + '@' + process.env.BACKEND_STORAGE_MONGO + ':27017/todo'
 }
